@@ -18,4 +18,10 @@ public interface StudentDAO {
     public List<Student> findAll();
     
     public Student find(String id);
+    
+    public Student findByLAstName(String name);
+    
+    public void Delete(Student student);
+    
+    public void Update(Student student);
 }

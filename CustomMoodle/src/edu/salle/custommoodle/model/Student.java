@@ -5,11 +5,13 @@
  */
 package edu.salle.custommoodle.model;
 
+import java.util.Objects;
+
 /**
  *
  * @author bedo9
  */
-public class Student {
+public class Student{
     private String name;
     private String lastname;
     private String id;
@@ -49,6 +51,25 @@ public class Student {
     @Override
     public String toString() {
         return String.format("id=%s,\n name=%s,\n lastname=%s", id,name,lastname);
+    }
+
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Student other = (Student) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
     
     

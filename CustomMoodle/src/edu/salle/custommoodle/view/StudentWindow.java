@@ -7,6 +7,8 @@ package edu.salle.custommoodle.view;
 
 import edu.salle.custommoodle.businesslogic.StudentBLO;
 import edu.salle.custommoodle.model.Student;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -41,6 +43,11 @@ public class StudentWindow extends javax.swing.JFrame {
         bSearch = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         tfId = new javax.swing.JTextField();
+        bUpdate = new javax.swing.JButton();
+        bDelete = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tStudents = new javax.swing.JTable();
+        bRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -65,7 +72,7 @@ public class StudentWindow extends javax.swing.JFrame {
                 bSaveActionPerformed(evt);
             }
         });
-        getContentPane().add(bSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+        getContentPane().add(bSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
         bSearch.setText("Search");
         bSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -73,11 +80,37 @@ public class StudentWindow extends javax.swing.JFrame {
                 bSearchActionPerformed(evt);
             }
         });
-        getContentPane().add(bSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
+        getContentPane().add(bSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
 
         jLabel3.setText("id:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, -1, -1));
         getContentPane().add(tfId, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 60, -1));
+
+        bUpdate.setText("Update");
+        getContentPane().add(bUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, -1, -1));
+
+        bDelete.setText("Delete");
+        getContentPane().add(bDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, -1, -1));
+
+        tStudents.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "id", "Name", "Last Name"
+            }
+        ));
+        jScrollPane1.setViewportView(tStudents);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 630, 300));
+
+        bRefresh.setText("Refresh");
+        bRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRefreshActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 180, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -104,6 +137,35 @@ public class StudentWindow extends javax.swing.JFrame {
            tfLastName.setText(student.getLastname());
        }
     }//GEN-LAST:event_bSearchActionPerformed
+
+    
+    public void clearTable(){
+        DefaultTableModel dtm = (DefaultTableModel) tStudents.getModel();
+        while(dtm.getRowCount()>0){
+            dtm.removeRow(0);
+        }
+    }
+    
+    private void refreshTable(){
+        clearTable();
+        
+        List<Student> studentList = studentBLO.findAll();
+        DefaultTableModel dtm = (DefaultTableModel) tStudents.getModel();
+        Object[] emptyRow = {""};
+        
+       
+        for (int i = 0; i < studentList.size(); i++) {
+            dtm.addRow(emptyRow);
+            dtm.setValueAt(studentList.get(i).getId(), i, 0);
+            dtm.setValueAt(studentList.get(i).getName(), i, 1);
+            dtm.setValueAt(studentList.get(i).getLastname(), i, 2);
+        }
+    }
+    
+    private void bRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRefreshActionPerformed
+        // TODO add your handling code here:
+        refreshTable();
+    }//GEN-LAST:event_bRefreshActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,11 +203,16 @@ public class StudentWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bDelete;
+    private javax.swing.JButton bRefresh;
     private javax.swing.JButton bSave;
     private javax.swing.JButton bSearch;
+    private javax.swing.JButton bUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tStudents;
     private javax.swing.JTextField tfId;
     private javax.swing.JTextField tfLastName;
     private javax.swing.JTextField tfName;
