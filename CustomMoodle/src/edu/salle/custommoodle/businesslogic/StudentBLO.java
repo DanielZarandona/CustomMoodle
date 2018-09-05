@@ -38,7 +38,7 @@ public class StudentBLO {
         return studentDAO.find(id);
     }
     
-    public Student findByLAstName(String name){
+    public List<Student> findByLAstName(String name){
         return studentDAO.findByLAstName(name);
     }
     
@@ -48,5 +48,13 @@ public class StudentBLO {
     
     public void Update(Student student){
         studentDAO.Update(student);
+    }
+    
+    public void load(){
+        studentDAO.load();
+    }
+    
+    public void commitChanges(){
+        studentDAO.commitChages();
     }
 }

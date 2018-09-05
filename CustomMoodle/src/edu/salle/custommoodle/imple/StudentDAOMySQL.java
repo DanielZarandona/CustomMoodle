@@ -31,7 +31,7 @@ public class StudentDAOMySQL implements StudentDAO{
     }
 
     @Override
-    public Student findByLAstName(String name) {
+    public List<Student> findByLAstName(String name) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -42,6 +42,16 @@ public class StudentDAOMySQL implements StudentDAO{
 
     @Override
     public void Update(Student student) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void load() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void commitChages() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
